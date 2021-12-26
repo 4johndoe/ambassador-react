@@ -1,14 +1,14 @@
 import React, {Dispatch, useEffect, useState} from "react";
 import Nav from "./Nav";
 import Header from "./Header";
-import {Redirect} from "react-router-dom";
+import {Redirect, useLocation} from "react-router-dom";
 import axios from "axios";
 import {User} from "../models/user";
 import {setUser} from "../redux/actions/setUserAction";
 import {connect} from "react-redux";
 
 const Layout = (props: any) => {
-    const [redirect, setRedirect] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         (
@@ -19,11 +19,16 @@ const Layout = (props: any) => {
                     props.setUser(data);
                 } catch (e) {
                     console.log(1111, e);
-                    setRedirect(true);
                 }
             }
         )();
     }, []);
+
+    let header;
+
+    if (location.pathname === '/' || location.pathname === '/backend') {
+        header = <Header />
+    }
 
     return (
         <div>
@@ -31,7 +36,7 @@ const Layout = (props: any) => {
 
             <main>
 
-                <Header/>
+                {header}
 
                 <div className="album py-5 bg-light">
                     <div className="container">
