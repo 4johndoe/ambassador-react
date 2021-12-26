@@ -25,10 +25,6 @@ const Layout = (props: any) => {
         )();
     }, []);
 
-    if (redirect) {
-        return <Redirect to={'/login'} />
-    }
-
     return (
         <div>
             <Nav/>
