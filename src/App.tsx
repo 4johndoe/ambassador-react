@@ -7,11 +7,13 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Stats from "./pages/Stats";
 import Rankings from "./pages/Rankings";
+import ProductsBackend from "./pages/ProductsBackend";
 
 function App() {
     return (
         <BrowserRouter>
             <Route path={'/'} exact component={ProductsFrontend}/>
+            <Route path={'/backend'} exact component={ProductsBackend}/>
             <Route path={'/login'} component={Login}/>
             <Route path={'/register'} component={Register}/>
             <Route path={'/profile'} component={Profile}/>
