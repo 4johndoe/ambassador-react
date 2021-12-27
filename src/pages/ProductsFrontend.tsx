@@ -6,6 +6,9 @@ import axios from "axios";
 
 const ProductsFrontend = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [filters, setFilters] = useState({
+        s: '',
+    });
 
     useEffect(() => {
         (
@@ -19,7 +22,7 @@ const ProductsFrontend = () => {
 
     return (
         <Layout>
-            <Products products={products}/>
+            <Products products={products} filters={filters} setFilters={setFilters} />
         </Layout>
     );
 };

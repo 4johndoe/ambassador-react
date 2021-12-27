@@ -6,6 +6,9 @@ import {Product} from "../models/product";
 
 const ProductsBackend = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [filters, setFilters] = useState({
+        s: '',
+    });
 
     useEffect(() => {
         (
@@ -19,7 +22,7 @@ const ProductsBackend = () => {
 
     return (
         <Layout>
-            <Products products={products}/>
+            <Products products={products} filters={filters} setFilters={setFilters} />
         </Layout>
     );
 };
