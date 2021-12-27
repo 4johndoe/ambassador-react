@@ -13,6 +13,8 @@ const ProductsBackend = () => {
         page: 1,
     });
 
+    const [lastPage, setLastPage] = useState(0);
+
     useEffect(() => {
         (
             async () => {
@@ -33,13 +35,14 @@ const ProductsBackend = () => {
                 const {data} = await axios.get(`products/backend?${arr.join('&')}`);
 
                 setProducts(filters.page === 1 ? data.data : [...products, ...data.data]);
+                setLastPage(data.meta.last_page);
             }
         )();
     }, [filters]);
 
     return (
         <Layout>
-            <Products products={products} filters={filters} setFilters={setFilters} />
+            <Products products={products} filters={filters} setFilters={setFilters} lastPage={lastPage}/>
         </Layout>
     );
 };

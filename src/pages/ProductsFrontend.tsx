@@ -13,6 +13,8 @@ const ProductsFrontend = () => {
         sort: '',
         page: 1,
     });
+    const [lastPage, setLastPage] = useState(0);
+    const perPage = 9;
 
     useEffect(() => {
         (
@@ -21,6 +23,7 @@ const ProductsFrontend = () => {
 
                 setAllProducts(data);
                 setFilteredProducts(data);
+                setLastPage(Math.ceil(data.length / perPage));
             }
         )();
     }, []);
@@ -55,12 +58,13 @@ const ProductsFrontend = () => {
             })
         }
 
-        setFilteredProducts(products);
+        setFilteredProducts(products.slice(0, filters.page * perPage));
+        setLastPage(Math.ceil(products.length / perPage));
     }, [filters]);
 
     return (
         <Layout>
-            <Products products={filteredProducts} filters={filters} setFilters={setFilters} />
+            <Products products={filteredProducts} filters={filters} setFilters={setFilters} lastPage={lastPage}/>
         </Layout>
     );
 };

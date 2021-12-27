@@ -6,6 +6,7 @@ const Products = (props: {
     products: Product[],
     filters: Filters,
     setFilters: (filters: Filters) => void,
+    lastPage: number,
 }) => {
 
     const search = (s: string) => {
@@ -28,6 +29,16 @@ const Products = (props: {
             ...props.filters,
             page: props.filters.page + 1,
         });
+    }
+
+    let button;
+
+    if (props.filters.page !== props.lastPage) {
+        button = (
+            <div className="d-flex justify-content-center mt-4">
+                <button className="btn btn-primary" onClick={load}>Load More</button>
+            </div>
+        );
     }
 
     return (
@@ -64,9 +75,7 @@ const Products = (props: {
                 })}
             </div>
 
-            <div className="d-flex justify-content-center mt-4">
-                <button className="btn btn-primary" onClick={load}>Load More</button>
-            </div>
+            {button}
         </>
     );
 };
