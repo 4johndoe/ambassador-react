@@ -13,12 +13,18 @@ const ProductsBackend = () => {
     useEffect(() => {
         (
             async () => {
-                const {data} = await axios.get('products/backend');
+                const arr = [];
+
+                if (filters.s) {
+                    arr.push(`s=${filters.s}`);
+                }
+
+                const {data} = await axios.get(`products/backend?${arr.join('&')}`);
 
                 setProducts(data.data);
             }
         )();
-    }, []);
+    }, [filters]);
 
     return (
         <Layout>
