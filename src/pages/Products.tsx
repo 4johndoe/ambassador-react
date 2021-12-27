@@ -65,6 +65,14 @@ const Products = (props: {
                 error: true,
                 message: 'You should be logged in to generate link!',
             });
+        } finally {
+            setTimeout(() => {
+                setNotify({
+                    show: false,
+                    error: false,
+                    message: '',
+                });
+            }, 3000);
         }
     }
 
