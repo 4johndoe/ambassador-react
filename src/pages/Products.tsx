@@ -11,13 +11,22 @@ const Products = (props: {
     const search = (s: string) => {
         props.setFilters({
             ...props.filters,
+            page: 1,
             s,
         });
     }
     const sort = (sort: string) => {
         props.setFilters({
             ...props.filters,
+            page: 1,
             sort,
+        });
+    }
+
+    const load = () => {
+        props.setFilters({
+            ...props.filters,
+            page: props.filters.page + 1,
         });
     }
 
@@ -53,6 +62,10 @@ const Products = (props: {
                         </div>
                     );
                 })}
+            </div>
+
+            <div className="d-flex justify-content-center mt-4">
+                <button className="btn btn-primary" onClick={load}>Load More</button>
             </div>
         </>
     );

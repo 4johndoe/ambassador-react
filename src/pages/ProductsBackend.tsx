@@ -10,6 +10,7 @@ const ProductsBackend = () => {
     const [filters, setFilters] = useState<Filters>({
         s: '',
         sort: '',
+        page: 1,
     });
 
     useEffect(() => {
@@ -25,9 +26,13 @@ const ProductsBackend = () => {
                     arr.push(`sort=${filters.sort}`);
                 }
 
+                if (filters.page) {
+                    arr.push(`page=${filters.page}`);
+                }
+
                 const {data} = await axios.get(`products/backend?${arr.join('&')}`);
 
-                setProducts(data.data);
+                setProducts(filters.page === 1 ? data.data : [...products, ...data.data]);
             }
         )();
     }, [filters]);
